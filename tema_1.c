@@ -5,6 +5,8 @@
 #include<malloc.h>
 #include<stdlib.h>
 
+// INSERARE SI STERGERE LA MIJLOC + STERGERE LA FINAL
+
 #define SIZELINE 128
 
 struct Car {
@@ -55,7 +57,7 @@ void insertAtEnd(Node** start, Car car)
 }
 
 
-//stergrele la inceput si la final
+//stergrele la inceput 
 Car deleteAtBeginning(Node** start)
 {
 	Node* deleted = *start;
@@ -66,7 +68,7 @@ Car deleteAtBeginning(Node** start)
 		return deletedCar;
 }
 
-//stergere la final
+//STERGERE LA FINAL
 Car deleteAtEnd(Node** start)
 {
 	if (*start)
