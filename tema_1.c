@@ -119,11 +119,11 @@ void insertAtMiddle(Node** start, Car car, int position) {
 void deleteAtMiddle(Node** start, int position)
 {
 	if (*start == NULL || position <= 0)
-		return; // Lista este goală sau poziția nu este validă
+		return;
 
 	Node* temp = *start;
 
-	// Dacă trebuie să ștergem primul nod
+	
 	if (position == 1)
 	{
 		*start = temp->next;
@@ -141,11 +141,10 @@ void deleteAtMiddle(Node** start, int position)
 		count++;
 	}
 
-	// Dacă poziția este mai mare decât lungimea listei
+	
 	if (temp == NULL)
 		return;
 
-	// Scoatem nodul din listă
 	prev->next = temp->next;
 	free(temp);
 }
@@ -287,9 +286,5 @@ int main()
 
 
 }
-	//printf("\n----------------stergere la mijloc----------------------------------\n");
-	//deleteAtMiddle(&list, 4);
-	//parseListAndPrint(&list);
-
 
 	
