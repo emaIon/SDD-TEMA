@@ -30,6 +30,40 @@ struct DoublyLinkedList {
 	Node* start;
 	Node* end;
 };
+//delete by manufacturer
+void deleteByManufacturer(DLList* list, const char* manufacturer) {
+
+	if (list->start) {
+		Node* current = list->start;
+		while (current) {
+			Node* toDelete = current;
+			current = current->next;
+
+			if (strcmp(toDelete->car.manufacturer, manufacturer) == 0) {
+				if (toDelete->prev) {
+					toDelete->prev->next = toDelete->next;
+				}
+				else {
+					list->start = toDelete->next;
+				}
+
+				if (toDelete->next) {
+					toDelete->next->prev = toDelete->prev;
+				}
+				else {
+					list->end = toDelete->prev;
+				}
+
+				free(toDelete->car.manufacturer);
+				free(toDelete);
+			}
+		}
+	}
+	else
+	{
+		printf("lista e goala");
+	}
+}
 
 
 // stergere in fct de an (de la mijloc)
@@ -39,28 +73,28 @@ void deleteByYear(DLList* list, int year) {
 		Node* current = list->start;
 
 		while (current) {
-			Node* toDelete = current; 
-			current = current->next;  
+			Node* toDelete = current;
+			current = current->next;
 
 			if (toDelete->car.year > year) {
-				
-				if (toDelete->prev) { 
+
+				if (toDelete->prev) {
 					toDelete->prev->next = toDelete->next;
 				}
-				else { 
+				else {
 					list->start = toDelete->next;
 				}
 
-				if (toDelete->next) { 
+				if (toDelete->next) {
 					toDelete->next->prev = toDelete->prev;
 				}
-				else { 
+				else {
 					list->end = toDelete->prev;
 				}
 
-				
-				free(toDelete->car.manufacturer);  
-				free(toDelete);  
+
+				free(toDelete->car.manufacturer);
+				free(toDelete);
 			}
 		}
 	}
@@ -138,7 +172,7 @@ void insertInMiddleIfYearAbove2020(DLList* list, Car car) {
 		list->end = newNode;
 		return;
 	}
-	
+
 }
 
 void printCar(Car car)
@@ -338,6 +372,13 @@ int main()
 	list.start = NULL;
 	list.end = NULL;
 
+	readCarsFromFile(&list, &nr, "cars.txt");
+	parseBtoE(list);
+
+	printf("\n-------------delete by manufacturer--------\n");
+	deleteByManufacturer(&list, "BMW");
+	parseBtoE(list);
+
 	printf("\n--------inserare de la inceput la final----------------\n");
 	readCarsFromFile(&list, &nr, "cars.txt");
 	parseBtoE(list);
@@ -363,7 +404,7 @@ int main()
 
 
 	printf("\n-------inserare in functei de an (de la mijloc)-----------\n");
-	insertInMiddleByYear(&list, (Car){2024,"Logan", 1.4});
+	insertInMiddleByYear(&list, (Car) { 2024, "Logan", 1.4 });
 	insertInMiddleByYear(&list, (Car) { 2005, "Logan", 1.4 });
 	insertInMiddleByYear(&list, (Car) { 2020, "Logan", 1.4 });
 	parseBtoE(list);
